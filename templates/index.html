@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PM10 Prediction Model</title>
+    <style>
+        /* Base Styling */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f7f6;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            font-size: 2.5em;
+        }
+
+        /* Form Container */
+        .container {
+            max-width: 600px;
+            width: 100%;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+
+        label {
+            font-size: 1.1em;
+            color: #2c3e50;
+            margin-bottom: 8px;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #dcdcdc;
+            border-radius: 6px;
+            font-size: 1em;
+            box-sizing: border-box;
+            background-color: #f9f9f9;
+            transition: border 0.3s ease;
+        }
+
+        input:focus {
+            border-color: #3498db;
+            outline: none;
+        }
+
+        button {
+            width: 100%;
+            background-color: #3498db;
+            color: white;
+            padding: 15px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1.1em;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        /* Result Styling */
+        .result {
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: #ecf0f1;
+            text-align: center;
+            font-size: 1.2em;
+            color: #2c3e50;
+            border-left: 5px solid #3498db;
+        }
+
+        .result h3 {
+            margin: 0 0 10px 0;
+            font-size: 1.5em;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+            }
+
+            .container {
+                padding: 20px;
+            }
+
+            button {
+                font-size: 1em;
+            }
+
+            input {
+                padding: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.8em;
+            }
+
+            .container {
+                padding: 15px;
+            }
+
+            input {
+                padding: 8px;
+            }
+
+            button {
+                padding: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>PM10 Prediction Model</h1>
+        <form action="/predict" method="POST">
+            <label for="pm25">PM2.5:</label>
+            <input type="number" step="any" id="pm25" name="pm25" required>
+
+            <label for="pm10">PM10:</label>
+            <input type="number" step="any" id="pm10" name="pm10" required>
+
+            <label for="no">NO:</label>
+            <input type="number" step="any" id="no" name="no" required>
+
+            <label for="no2">NO2:</label>
+            <input type="number" step="any" id="no2" name="no2" required>
+
+            <label for="nox">NOx:</label>
+            <input type="number" step="any" id="nox" name="nox" required>
+
+            <label for="nh3">NH3:</label>
+            <input type="number" step="any" id="nh3" name="nh3" required>
+
+            <label for="so2">SO2:</label>
+            <input type="number" step="any" id="so2" name="so2" required>
+
+            <label for="co">CO:</label>
+            <input type="number" step="any" id="co" name="co" required>
+
+            <label for="ozone">Ozone:</label>
+            <input type="number" step="any" id="ozone" name="ozone" required>
+
+            <button type="submit">Predict PM10</button>
+        </form>
+
+        <!-- Show the predicted PM10 value if it exists -->
+        {% if predicted_value is not none %}
+        <div class="result">
+            <h3>Predicted PM10 Value:</h3>
+            <p>{{ predicted_value }}</p>
+        </div>
+        {% endif %}
+    </div>
+
+</body>
+</html>
